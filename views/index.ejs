@@ -19,7 +19,7 @@
           form { background-color: #000; 
            border-color: #fff; }
            #messages li { background-color: black;}
-           form input { background-color: black};
+           form input { background-color: black; color: white;};
            form button { width: 9%;color:#eee; background: rgb(86, 12, 69);}
            #messages li:nth-child(odd) { background: #000; }
         }
@@ -30,7 +30,7 @@
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
   </head>
   <body>
-    <ul id="messages"></ul>
+    <ul id="messages" style="margin-bottom:45px;"></ul>
     <form action="/" method="POST" id="chatForm">
       <input id="txt" autocomplete="off" autofocus="on" oninput="isTyping()" placeholder="type your message here..." /><button>Send</button>
     </form>
