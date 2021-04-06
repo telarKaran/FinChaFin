@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+     
+  
+
+  <meta charset="utf-8">
+  <title>Paisaat</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href="/images/unnamed.png" style="border-radius: 100%;" type="image/gif" sizes="16x16">
+ 
+  <script src="../../socket.io/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+</head>
+  
+
+
+  <nav class="navbar navbar-default" id="myHeader">
+    <div class="container">
+      <div class="navbar-header">
+        <p style="font-size: 3rem;  user-select: none;" class="navbar-brand">PAISAAT</p>
+      </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li id="home"><a href="/">HOME</a></li>
+		  <li id="community"><a href="/community" >COMMUNITY</a></li>
+         
+          <li id="about"><a  href="/about" style="cursor:pointer;" >ABOUT US</a></li>
+          <li id="learn"><a href="/learn">LEARN</a></li>
+          <li onclick="myFunction2()" id="invest"><a style="cursor:pointer; user-select: none;">INVEST</a>
+            <ul id="dropD" class="nav-dropdown">
+              <li>
+                <a style="text-decoration: none;" href="/invest">INVEST</a>
+              </li>
+              <li>
+                <a style="text-decoration: none;" href="/portfolio">PORTFOLIO</a>
+              </li>
+              <li>
+                <a style="text-decoration: none;" href="/management">MANAGEMENT</a>
+              </li>
+            </ul>
+          </li>
+          <li id="news"><a  href="/news" style="cursor:pointer;">NEWS</a></li>
+          
+          <li id="faq"><a   href="/faqs"  style="cursor:pointer;" >FAQ's</a></li>
+          
+          <li  class="nav-item  loginRegis">
+            <a  id="login" class="nav-link  " href="/login"><i class="fas fa-sign-in-alt"></i> LOGIN</a>
+          </li><li  class="nav-item  loginRegis ">
+            <a  id="register" class="nav-link " href="/register"><i class="fas fa-sign-in-alt"></i> REGISTER</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+
+
+  <body>
+    
+<script>
+
+var socket = io.connect('http://localhost:3000/community');
+
+// submit text message without reload/refresh the page
+$('form').submit(function(e){
+    e.preventDefault(); // prevents page reloading
+    socket.emit('chat_message', $('#txt').val());
+    $('#txt').val('');
+    return false;
+});
+
+// append the chat text message
+socket.on('chat_message', function(msg){
+    $('#messages').append($('<li>').html(msg));
+});
+
+// append text if someone is online
+socket.on('is_online', function(username) {
+    $('#messages').append($('<li>').html(username));
+});
+
+// ask username
+var username = "karan";
+socket.emit('username', username);
+
+
+  window.onscroll = function() {myFunction()};
+  
+  var header = document.getElementById("myHeader");
+  var sticky = header.offsetTop;
+  
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
+    }
+  }
+
+  const btnScrollTo1 = document.querySelector('#news');
+  const btnScrollTo2 = document.querySelector('#about');
+  const btnScrollTo3 = document.querySelector('#faq');
+  
+  
+
+  let registered = false ;
+
+const loginButton = document.querySelector('#login');
+  const registerButton = document.querySelector('#register');
+  
+  function changeRegistered(registered){
+  registered=true;
+  console.log(registered);
+}
+  
+
+  btnScrollTo1.addEventListener('click', function (e){
+    
+  const section1 = document.querySelector('.section1');
+  section1.scrollIntoView({behavior:'smooth'});
+});
+
+  btnScrollTo2.addEventListener('click', function (e){
+    
+    const section2 = document.querySelector('.section2');
+    
+    section2.scrollIntoView({behavior:'smooth'}); 
+  });
+
+    btnScrollTo3.addEventListener('click', function (e){
+    
+    const section3 = document.querySelector('.section3');
+    
+    section3.scrollIntoView({behavior:'smooth'});   
+  });
+
+  function myFunction2() {
+  var x = document.getElementById("dropD");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+  
+  </script>
+ 

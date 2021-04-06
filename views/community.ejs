@@ -1,0 +1,11 @@
+<%- include("partials/header"); -%>
+    <h1>Community</h1>
+    
+    <ul id="messages"></ul>
+    <form action="/community" method="POST" id="chatForm">
+      <input id="txt" autocomplete="off" autofocus="on" oninput="isTyping()" placeholder="type your message here..." /><button>Send</button>
+    </form>
+    
+    <p style="margin-top: 50px;"> <%= contactContent %> </p>
+  
+<%- include("partials/footer"); -%>
